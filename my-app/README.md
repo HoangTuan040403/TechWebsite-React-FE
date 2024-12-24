@@ -2,7 +2,7 @@
 
 ## 📖 Giới thiệu
 
-**WebSite Bán Điện Thoại** là một nền tảng thương mại điện tử được phát triển bằng **React.js**, cung cấp trải nghiệm mua sắm trực tuyến hiện đại và tiện lợi. Dự án sử dụng các công nghệ tiên tiến như **Ant Design**, **Radix UI**, và **Recharts** để xây dựng giao diện trực quan, dễ sử dụng và thân thiện với người dùng. Đây là nơi người dùng có thể tìm kiếm và mua sắm các sản phẩm công nghệ như điện thoại, laptop, phụ kiện một cách nhanh chóng.
+**WebSite Bán Điện Thoại** là một nền tảng thương mại điện tử được phát triển bằng **React.js**, cung cấp trải nghiệm mua sắm trực tuyến hiện đại và tiện lợi. Dự án sử dụng các công nghệ tiên tiến như **Ant Design** để xây dựng giao diện trực quan, dễ sử dụng và thân thiện với người dùng. Đây là nơi người dùng có thể tìm kiếm và mua sắm các sản phẩm liên quan đến điện thoại một cách nhanh chóng.
 
 ## 📌 Mục tiêu của dự án
 
