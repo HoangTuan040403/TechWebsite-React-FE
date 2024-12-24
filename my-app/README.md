@@ -1,70 +1,71 @@
-# Getting Started with Create React App
+# WebSite Bán Điện Thoại
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 📖 Giới thiệu
 
-## Available Scripts
+**WebSite Bán Điện Thoại** là một nền tảng thương mại điện tử được phát triển bằng **React.js**, cung cấp trải nghiệm mua sắm trực tuyến hiện đại và tiện lợi. Dự án sử dụng các công nghệ tiên tiến như **Ant Design**, **Radix UI**, và **Recharts** để xây dựng giao diện trực quan, dễ sử dụng và thân thiện với người dùng. Đây là nơi người dùng có thể tìm kiếm và mua sắm các sản phẩm công nghệ như điện thoại, laptop, phụ kiện một cách nhanh chóng.
 
-In the project directory, you can run:
+## 📌 Mục tiêu của dự án
 
-### `npm start`
+- Mang đến trải nghiệm mua sắm trực tuyến mượt mà và thuận tiện.
+- Hỗ trợ quản lý kho hàng và đơn hàng hiệu quả cho nhà quản lý.
+- Tối ưu hóa toàn bộ quy trình từ chọn sản phẩm, đặt hàng, đến thanh toán.
+- Phát triển giao diện thân thiện, dễ sử dụng và phù hợp cho cả khách hàng lẫn nhà quản lý.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🎯 Tính năng chính
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Người dùng:
+- Xem danh mục sản phẩm theo từng loại.
+- Xem chi tiết sản phẩm với thông tin đầy đủ.
+- Tìm kiếm sản phẩm dựa trên tên, giá, hoặc thương hiệu.
+- Thêm sản phẩm vào giỏ hàng.
+- Theo dõi lịch sử mua hàng và gửi đánh giá sản phẩm.
 
-### `npm test`
+### Quản trị viên:
+- Quản lý sản phẩm: thêm, sửa, xóa.
+- Theo dõi báo cáo doanh thu theo ngày, tuần, hoặc tháng.
+- Quản lý thông tin khách hàng và đơn hàng.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🛠️ Công nghệ sử dụng
 
-### `npm run build`
+- **Framework**: React.js
+- **Thư viện UI**:  Ant Design, React Icons
+- **Quản lý trạng thái**: Redux Toolkit
+- **Xử lý API**: Axios
+- **Biểu đồ**: Recharts
+- **Tích hợp JWT**: jwt-decode
+- **Styled-components**: Tùy chỉnh giao diện linh hoạt.
+- **React Router Dom**: Điều hướng trang mạnh mẽ.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🚀 Hướng dẫn cài đặt và chạy
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Yêu cầu hệ thống
+- Node.js
+- npm hoặc yarn
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Các bước thực hiện
 
-### `npm run eject`
+1. Clone repository:
+   ```bash
+   git clone https://github.com/HoangTuan040403/TechWebsite-React-FE.git
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+2. Vào terminal:
+  - **npm i** để install toàn bộ thư viện
+  - **npm start** để chạy dự án
+  - Truy cập vào [http://localhost:3000](http://localhost:3000) để thấy được hệ thống web.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+    ### GitHub BackEnd
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+   ```bash
+   https://github.com/HoangTuan040403/TechWebsite-React-BE.git
+   ```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Tài liệu tham khảo
 
-## Learn More
+Để có thể hiểu hơn về Next.js, hãy tham khảo tại đây:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- [React.js](https://react.dev/)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+   
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
