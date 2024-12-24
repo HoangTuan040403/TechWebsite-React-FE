@@ -9,8 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as UserService from '../../sevices/UserService'
 import { resetUser } from '../../redux/slides/userSlide';
 import Loading from '../LoadingComponent/Loading';
-
-
+import { searchProduct } from '../../redux/slides/productSlide';
 
 
 function HeaderComponent({ isHiddenSearch = false, isHiddenCart = false }) {
@@ -20,14 +19,22 @@ function HeaderComponent({ isHiddenSearch = false, isHiddenCart = false }) {
   const [userName, setUserName] = useState('')
   const [userAvatar, setUserAvatar] = useState('')
   const [loading, setLoading] = useState(false)
+  const [search, setSearch] = useState('')
+
+
+  //Function Login
   const handleNavigateLogin = () => {
     navigate('/sign-in')
   }
 
+
+  //Function view profile
   const handleNavigateProfile = () => {
     navigate('/profile-user')
   }
 
+
+  //Function Logout
   const handleLogout = async () => {
     setLoading(true)
     await UserService.logoutUser()
@@ -35,14 +42,20 @@ function HeaderComponent({ isHiddenSearch = false, isHiddenCart = false }) {
     setLoading(false)
   }
 
+  //Cập nhật trạng thái đăng nhập
   useEffect(() => {
+    // Bắt đầu bằng cách đặt trạng thái loading sang true để hiển thị trạng thái chờ.
     setLoading(true)
+    // Cập nhật giá trị của biến userName với thuộc tính name từ đối tượng user.
     setUserName(user?.name)
+    // Cập nhật giá trị của biến userAvatar với thuộc tính avatar từ đối tượng user.
     setUserAvatar(user?.avatar)
+    // Sau khi cập nhật xong userName và userAvatar, đặt trạng thái loading sang false.
     setLoading(false)
+    // useEffect sẽ kích hoạt lại mỗi khi các giá trị user?.name hoặc user?.avatar thay đổi.
   }, [user?.name, user?.avatar])
 
-
+  //Account Icon
   const content = (
     <div>
       <WrapperContentPopup onClick={handleNavigateProfile}>Thông tin cá nhân</WrapperContentPopup>
@@ -54,9 +67,21 @@ function HeaderComponent({ isHiddenSearch = false, isHiddenCart = false }) {
 
     </div>
   );
+
+
+  ///Search
+  const onSearch = (e) => {
+    setSearch(e.target.value)
+    dispatch(searchProduct(e.target.value))//dispatch len action
+    console.log('e', e.target.value)
+  }
+
+
+
   return (
     <div>
       <WrapperHeader gutter={16} style={{ justifyContent: isHiddenSearch && isHiddenCart ? 'space-between' : 'unset' }}>
+
         <Col span={5}>
           <Image src={imageLogo} preview={false} alt="image-logo" height="55px" width="55px" />
         </Col>
@@ -64,8 +89,11 @@ function HeaderComponent({ isHiddenSearch = false, isHiddenCart = false }) {
           <Col span={13}>
             <ButtonInputSearch
               size="large"
-              textButton="Tìm kiếm"
-              placeholder="Nhập từ khóa tìm kiếm" />
+
+              placeholder="Nhập từ khóa tìm kiếm"
+              onChange={onSearch}
+            />
+
           </Col>
         )}
         <Col span={6} style={{ display: 'flex', gap: '20px' }}>

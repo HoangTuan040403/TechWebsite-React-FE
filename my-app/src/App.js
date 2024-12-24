@@ -22,9 +22,9 @@ function App() {
 
   useEffect(() => {
     setIsLoading(true);
-  
+
     const { storageData, decoded } = handleDecoded();
-    
+
     // Kiểm tra nếu người dùng đã đăng nhập (có token và decoded id)
     if (decoded?.id) {
       handleGetDetailUser(decoded?.id, storageData);
@@ -32,10 +32,10 @@ function App() {
       // Nếu chưa đăng nhập, chỉ log hoặc xử lý khác nếu cần
       console.log('Chưa đăng nhập');
     }
-  
+
     setIsLoading(false);
   }, []);
-  
+
 
   const handleDecoded = () => {
     let storageData = localStorage.getItem('access_token')
@@ -50,7 +50,7 @@ function App() {
   UserService.axiosJWT.interceptors.request.use(async (config) => {
     const currentTime = new Date()
     const { decoded } = handleDecoded()
-    if(decoded?.exp < currentTime.getTime() / 1000){
+    if (decoded?.exp < currentTime.getTime() / 1000) {
       const data = await UserService.refreshToken()
       config.headers['token'] = `Bearer ${data?.access_token}`
     }
@@ -62,7 +62,7 @@ function App() {
   // const handleGetDetailUser = async (id, token) => {
   //   const res = await UserService.getDetailUser(id, token)
   //   dispatch(updateUser({ ...res?.data, access_token: token }))
-    
+
   // }
 
 
@@ -72,7 +72,7 @@ function App() {
       return;
     }
     console.log('Fetching user details with ID:', id, 'and token:', token);
-  
+
     try {
       const res = await UserService.getDetailUser(id, token);
       dispatch(updateUser({ ...res?.data, access_token: token }));
@@ -80,13 +80,13 @@ function App() {
       console.error('Error fetching user details:', error);
     }
   }
-  
+
 
 
 
 
   return (
-   
+
     <div >
       <Router>
         <Routes>
@@ -106,7 +106,7 @@ function App() {
       </Router>
 
     </div>
-   
+
   );
 }
 

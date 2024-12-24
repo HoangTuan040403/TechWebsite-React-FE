@@ -20,8 +20,8 @@ export const WrapperHeader = styled(Row)`
 export const WrapperTextHeader = styled.span`
     font-size: 28px;
     color: rgb(130, 134, 158);
-    font-weight" bold;
-    text-align: left
+    font-weight: bold;
+    text-align: left;
 `
 
 export const WrapperHeaderAccount = styled.div`
@@ -29,14 +29,16 @@ export const WrapperHeaderAccount = styled.div`
     align-items: center;
     color: rgb(130, 134, 158);
     gap: 10px;
-    font-size: 14px
+    font-size: 14px;
     
 `
 
 export const WrapperTextHeaderSmall = styled.span`
     color: rgb(130, 134, 158);
     font-size: 14px;
-    wihte-space: nowrap
+   
+    white-space: nowrap;
+    
 `
 export const WrapperContentPopup = styled.p`
     cursor: pointer;

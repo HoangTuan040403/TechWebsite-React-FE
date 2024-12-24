@@ -337,6 +337,8 @@ const AdminProduct = () => {
     return { ...product, key: product._id }
   })
 
+
+  ///Them san pham
   useEffect(() => {
     if (isSuccess && data?.status === 'OK') {
       message.success('Thêm thành công')
@@ -346,6 +348,7 @@ const AdminProduct = () => {
     }
   }, [isSuccess, isError])
 
+  //Update san pham
   useEffect(() => {
     if (isSuccessUpdated && dataUpdated?.status === 'OK') {
       message.success('Update thành công');
@@ -358,6 +361,8 @@ const AdminProduct = () => {
     }
   }, [isSuccessUpdated, isErrorUpdated]);
 
+
+  //Xoa san pham
   useEffect(() => {
     if (isSuccessDeleted && dataDeleted?.status === 'OK') {
       message.success('Xóa thành công')
@@ -367,6 +372,8 @@ const AdminProduct = () => {
     }
   }, [isSuccessDeleted, isErrorDeleted])
 
+
+  //Xoa nhieu san pham
   useEffect(() => {
     if (isSuccessDeletedMany && dataDeletedMany?.status === 'OK') {
       message.success('Xóa thành công')
@@ -432,7 +439,6 @@ const AdminProduct = () => {
 
   const onFinish = () => {
     mutation.mutate(stateProduct, {
-
       onSettled: () => {
         queryProduct.refetch();
       },
@@ -643,6 +649,7 @@ const AdminProduct = () => {
           </Form>
         </Loading>
       </Modal>
+
       <DrawerComponent title='Chi tiết sản phẩm' isOpen={isOpenDrawer} onClose={() => setIsOpenDrawer(false)} width="30%">
         <Loading isPending={mutation.isPending}>
           <Form
