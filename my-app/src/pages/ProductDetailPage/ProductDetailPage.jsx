@@ -1,12 +1,18 @@
 import React from 'react';
 import ProductDetailComponent from '../../components/ProductDetailComponent/ProductDetailComponent';
+import { useParams } from 'react-router-dom';
+import Container from '../../components/Container/Container';
 
 const ProductDetailPage = () => {
+  const { id } = useParams()
   return (
-    <div style={{padding: '0 120px', background:'#efefef', height:'1200px'}}>
-        <h2>Trang chủ</h2>
-        <ProductDetailComponent/>     
-    </div>
+
+
+    <Container>
+      <h2>Trang chủ - Chi tiết sản phẩm</h2>
+      <ProductDetailComponent idProduct={id} />
+    </Container>
+
   );
 };
 

@@ -4,7 +4,7 @@ const initialState = {
   search: '',
 };
 
-const productSlide = createSlice({
+export const productSlide = createSlice({
   name: 'product',
   initialState,
   reducers: {

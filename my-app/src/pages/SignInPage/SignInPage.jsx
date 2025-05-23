@@ -4,7 +4,7 @@ import InputForm from '../../components/InputForm/InputForm';
 import { Image } from 'antd';
 import imageLogo from '../../assets/images/logostore.png';
 import { EyeFilled, EyeInvisibleFilled } from '@ant-design/icons';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import ButtonComponent from '../../components/ButtonComponent/ButtonComponent';
 import * as UserService from '../../sevices/UserService'
 import { useMutationHooks } from '../../hooks/useMutationHook';
@@ -20,6 +20,7 @@ const SignInPage = () => {
   const navigate = useNavigate()
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const location = useLocation()
   const dispatch = useDispatch();
 
   const mutation = useMutationHooks(
@@ -27,26 +28,14 @@ const SignInPage = () => {
   )
   const { data, isLoading, isSuccess, isError } = mutation
 
-  // useEffect(() => {
-  //   if (isSuccess) {
-  //     message.success('Đăng nhập thành công');
-  //     localStorage.setItem('access_token', JSON.stringify(data?.access_token))
-  //     if (data?.access_token) {
-  //       const decoded = jwtDecode(data?.access_token)
-  //       console.log('decode', decoded)
 
-  //       if (decoded?.id) {
-  //         handleGetDetailUser(decoded?.id, data?.access_token)
-  //         navigate('/')
-  //       }
-  //     } else if (isError) {
-  //       message.error('Sai thông tin đăng nhập')
-  //     }
-
-  //   }
-  // }, [isSuccess, isError])
   useEffect(() => {
     if (isSuccess) {
+      if (location?.state) {
+        navigate(location?.state)
+      } else {
+        navigate('/')
+      }
       if (data?.access_token) {
         message.success('Đăng nhập thành công');
         localStorage.setItem('access_token', JSON.stringify(data.access_token));
@@ -75,25 +64,6 @@ const SignInPage = () => {
   }
 
 
-  // useEffect(() => {
-  //   if (isSuccess) {
-  //     message.success('Đăng nhập thành công')
-  //     handleSignIn()
-  //   } else if (isError) {
-  //     message.error('Sai thông tin đăng nhập')
-  //   }
-  // }, [isSuccess, isError])
-  //   useEffect(() => {
-  //     if (isSuccess) {
-  //         message.success('Đăng nhập thành công');
-  //         // Thực hiện các hành động cần thiết sau khi đăng nhập thành công
-  //         navigate('/'); // Điều hướng đến trang chính hoặc trang mong muốn
-  //         localStorage.setItem('access_token', JSON.stringify(data?.access_token)); // Lưu token nếu cần
-  //         // Bạn có thể gọi các hàm khác ở đây như lấy thông tin người dùng
-  //     } else if (isError) {
-  //         message.error('Sai thông tin đăng nhập'); // Thông báo lỗi rõ ràng
-  //     }
-  // }, [isSuccess, isError, data, navigate]); // Thêm 'data' và 'navigate' vào mảng phụ thuộc
 
 
   //
