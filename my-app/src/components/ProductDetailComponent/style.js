@@ -2,12 +2,12 @@ import styled from "styled-components";
 import { Col, Image, InputNumber } from 'antd';
 
 
-export const WrapperImageProductSmall= styled(Image)`
+export const WrapperImageProductSmall = styled(Image)`
     height: 64px;
     width: 64px;
 `
 
-export const WrapperImageCol= styled(Col)`
+export const WrapperImageCol = styled(Col)`
     flex-basis: unset;
     display: flex;
 `
@@ -23,7 +23,7 @@ export const WrapperNameProduct = styled.h1`
 `
 
 export const WrapperTextSell = styled.span`
-    font-size: 14px;
+    font-size: 16px;
     line-height: 24px;
     color: rgb(120, 120, 120);
 `
@@ -49,7 +49,7 @@ export const WrapperQualityProduct = styled.h1`
     align-items: center;
     border: 1px solid #ccc;
     border-radius: 4px;
-    width: 100px;
+    width: 110px;
 `
 
 export const WrapperBtnQualityProduct = styled.span`
@@ -57,7 +57,7 @@ export const WrapperBtnQualityProduct = styled.span`
 `
 
 export const WrapperInputNumber = styled(InputNumber)`
-        width: 60px;
+        
         border-top: none;
         border-bottom: none;
         &.ant-input-number-handler-wrap {

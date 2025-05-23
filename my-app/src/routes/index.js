@@ -10,7 +10,7 @@ import SignUpPage from "../pages/SignUpPage/SignUpPage";
 import TypeProductPage from "../pages/TypeProductPage/TypeProductPage";
 
 
-export const routes =[
+export const routes = [
     {
         path: '/',
         page: HomePage,
@@ -29,7 +29,7 @@ export const routes =[
 
     },
     {
-        path: '/:type',
+        path: '/product/:type',
         page: TypeProductPage,
         isShowHeader: true
 
@@ -39,15 +39,16 @@ export const routes =[
         page: SignInPage,
         isShowHeader: false
 
-    }, 
+    },
     {
         path: '/sign-up',
         page: SignUpPage,
         isShowHeader: false
 
-    }, 
+    },
+
     {
-        path: '/productdetail',
+        path: '/product-details/:id',
         page: ProductDetailPage,
         isShowHeader: true
 
@@ -63,6 +64,12 @@ export const routes =[
         page: AdminPage,
         isShowHeader: false,
         isPrivate: true
+    },
+    {
+        path: '/order',
+        page: OrderPage,
+        isShowHeader: true
+
     },
     {
         path: '*',

@@ -87,7 +87,7 @@ function App() {
 
   return (
 
-    <div >
+    <div className='bg-gray-100'>
       <Router>
         <Routes>
           {routes.map((route) => {

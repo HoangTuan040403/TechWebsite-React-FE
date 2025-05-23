@@ -6,8 +6,9 @@ export const WrapperCardStyle = styled(Card)`
     &img {
         height: 200px;
         width: 200px;
-    }, 
+    }
     position: relative;
+    padding: 6px;
     
 `
 
@@ -15,7 +16,7 @@ export const StyleNameProduct = styled.div`
     font-weight: 400;
     font-size: 12px;
     line-height: 16px;
-    color: rgb(56, 56, 61)
+    color: rgb(56, 56, 61);
 `
 
 export const WrapperReportText = styled.div`
@@ -23,7 +24,7 @@ export const WrapperReportText = styled.div`
     color: rgb(128, 128, 137);
     display: flex;
     align-items: center;
-    margin: 8px 0 4px
+    margin: 8px 0 4px;
 `
 
 export const WrapperPriceText = styled.div`
