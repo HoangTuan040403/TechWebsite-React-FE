@@ -7,7 +7,6 @@ import banner1 from '../../assets/images/bannerip16.png';
 import banner2 from '../../assets/images/iphone-16_overview.png';
 import banner3 from '../../assets/images/m55-6990-right-banner.png';
 import CardComponent from '../../components/CardComponent/CardComponent';
-import ButtonComponent from '../../components/ButtonComponent/ButtonComponent';
 import FooterComponent from '../../components/FooterComponent/FooterComponent';
 import { useQuery } from '@tanstack/react-query';
 import * as ProductService from '../../sevices/ProductService';
@@ -15,11 +14,9 @@ import * as CategoryService from '../../sevices/CategoryService';
 import { useSelector } from 'react-redux';
 import Loading from '../../components/LoadingComponent/Loading';
 import { useDebounce } from '../../hooks/useDebounce';
-import {
-  ViewMoreWrapper
-} from './style';
 import Container from '../../components/Container/Container';
 import ProductArrivalsComponent from '../../components/ProductArrivalsComponent/ProductArrivalsComponent';
+import BackToTopButton from '../../components/BackToTopComponent/BackToTopComponent';
 
 
 const HomePage = () => {
@@ -29,7 +26,27 @@ const HomePage = () => {
   const [loading, setLoading] = useState(false);
   const [stateProducts, setStateProducts] = useState([]);
   const [categoryProducts, setCategoryProducts] = useState([]);
+  const [visibleCount, setVisibleCount] = useState(0);
+  const [itemsPerPage, setItemsPerPage] = useState(5);
 
+  const handleLoadMore = () => {
+    setVisibleCount((prev) => prev + itemsPerPage);
+  };
+
+  useEffect(() => {
+    const updateItemsPerPage = () => {
+      if (window.innerWidth < 640) {
+        setItemsPerPage(4);
+        setVisibleCount(4);
+      } else {
+        setItemsPerPage(5);
+        setVisibleCount(5);
+      }
+    };
+    updateItemsPerPage();
+    window.addEventListener('resize', updateItemsPerPage);
+    return () => window.removeEventListener('resize', updateItemsPerPage);
+  }, [stateProducts.length]);
 
   const fetchProductAll = async (search) => {
     const res = await ProductService.findProduct(search);
@@ -39,8 +56,6 @@ const HomePage = () => {
       return res;
     }
   };
-
-
 
   useEffect(() => {
     if (refSearch.current) {
@@ -60,9 +75,7 @@ const HomePage = () => {
 
   useEffect(() => {
     fetchAllCategoryProduct();
-
   }, []);
-
 
   const { isLoading, data: products } = useQuery({
     queryKey: ['product'],
@@ -84,10 +97,9 @@ const HomePage = () => {
         </div> */}
         <div className="flex gap-4 lg:h-[350px] md:h-[200px] mt-2">
           <div className="w-full lg:w-3/4 border-gray-100 shadow-lg border">
-            {/* Ở màn hình nhỏ, chiếm full width */}
+
             <SliderComponent arrImages={[slider1, slider2, slider3]} />
           </div>
-
           <div className="hidden lg:flex lg:flex-col justify-between h-full w-1/4">
             {[banner1, banner2, banner3].map((img, i) => (
               <img
@@ -98,17 +110,8 @@ const HomePage = () => {
               />
             ))}
           </div>
-
-
         </div>
-
-
-
-
         <ProductArrivalsComponent />
-
-
-
         <div className="p-4 mt-9 bg-white rounded-lg">
           {/* Danh mục */}
           <div className="mb-6 lg:flex lg:justify-between">
@@ -133,11 +136,8 @@ const HomePage = () => {
               </div>
             </div>
           </div>
-
-
-          {/* Sản phẩm */}
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-            {stateProducts.map((product) => (
+            {stateProducts.slice(0, visibleCount).map((product) => (
               <CardComponent
                 key={product._id}
                 id={product._id}
@@ -149,22 +149,21 @@ const HomePage = () => {
               />
             ))}
           </div>
+
         </div>
+        <BackToTopButton />
 
-
-        <ViewMoreWrapper>
-          <ButtonComponent
-            textButton="Xem thêm"
-            type="outline"
-            styleButton={{
-              color: 'rgb(11, 116, 229)',
-              width: '240px',
-              height: '38px',
-              borderRadius: '4px',
-              padding: '4px 4px',
-            }}
-          />
-        </ViewMoreWrapper>
+        {visibleCount < stateProducts.length && (
+          <div className="flex justify-center mt-6">
+            <button
+              onClick={handleLoadMore}
+              className="w-full sm:w-[240px] h-[38px] px-4 py-2 text-blue-600 border border-blue-600 rounded hover:bg-blue-600
+           hover:text-white transition-colors duration-200 text-sm font-medium mb-4"
+            >
+              Xem thêm
+            </button>
+          </div>
+        )}
       </Container>
       <FooterComponent />
     </Loading>
