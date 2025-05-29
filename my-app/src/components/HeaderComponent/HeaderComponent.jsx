@@ -30,6 +30,7 @@ function HeaderComponent({ isHiddenSearch = false, isHiddenCart = false }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [cartQuantity, setCartQuantity] = useState(0);
   const inputRef = useRef(null);
+  const [inputValue, setInputValue] = useState('');
 
   // Tự động focus khi mở input
   useEffect(() => {
@@ -80,8 +81,13 @@ function HeaderComponent({ isHiddenSearch = false, isHiddenCart = false }) {
   );
 
   const onSearch = (e) => {
-    setSearch(e.target.value)
-    dispatch(searchProduct(e.target.value))
+    // setSearch(e.target.value)
+    // dispatch(searchProduct(e.target.value))
+    e.preventDefault();
+    if (inputValue.trim()) {
+      navigate(`/search?keyword=${encodeURIComponent(inputValue.trim())}`);
+      setInputValue('');
+    }
   }
 
   const mobileMenuContent = (
@@ -89,7 +95,7 @@ function HeaderComponent({ isHiddenSearch = false, isHiddenCart = false }) {
       {!isHiddenSearch && (
         <ButtonInputSearch
           placeholder="Tìm kiếm..."
-          onChange={onSearch}
+          onChange={(e) => setInputValue(e.target.value)}
           size="middle"
         />
       )}
@@ -153,7 +159,7 @@ function HeaderComponent({ isHiddenSearch = false, isHiddenCart = false }) {
             Trang chủ
           </Link>
           <Link
-            href="/page/product"
+            to="/products"
             className="text-gray-700 font-medium hover:text-blue-500 transition"
           >
             Sản phẩm
@@ -183,7 +189,7 @@ function HeaderComponent({ isHiddenSearch = false, isHiddenCart = false }) {
                   ref={inputRef}
                   type="text"
                   placeholder="Tìm kiếm..."
-                  onChange={onSearch}
+                  onChange={(e) => setInputValue(e.target.value)}
                   className={`border border-gray-300 rounded-lg px-4 py-2 text-sm transition-all duration-300 ease-in-out
         ${showSearch ? 'w-48 opacity-100 ml-2' : 'w-0 opacity-0 ml-0'}
         focus:outline-none focus:ring-2 focus:ring-blue-100 overflow-hidden`}
@@ -246,24 +252,46 @@ function HeaderComponent({ isHiddenSearch = false, isHiddenCart = false }) {
           ) : (
             <div className="relative flex items-center gap-3">
               {/* Search Input + Icon */}
-              <div className="flex items-center transition-all duration-300 ease-in-out">
+              {/* <div className="flex items-center transition-all duration-300 ease-in-out">
                 <input
                   ref={inputRef}
                   type="text"
                   placeholder="Tìm kiếm..."
-                  onChange={onSearch}
+
+                  onChange={(e) => setInputValue(e.target.value)}
                   className={`border border-gray-300 rounded-lg px-4 py-2 text-sm transition-all duration-700 ease-in-out
         ${showSearch ? 'w-48 opacity-100 ml-2' : 'w-0 opacity-0 ml-0'}
         focus:outline-none focus:ring-2 focus:ring-blue-500 overflow-hidden`}
                 />
                 <button
+                  type='submit'
                   onClick={() => setShowSearch(prev => !prev)}
                   aria-label="Toggle search input"
                   className="flex items-center justify-center w-10 h-10 rounded-full hover:bg-blue-100 transition duration-300 "
                 >
                   <IoSearchOutline size={20} className='hover:scale-105 ' />
                 </button>
-              </div>
+              </div> */}
+              <form onSubmit={onSearch} className="flex items-center transition-all  ease-in-out">
+                <input
+                  ref={inputRef}
+                  type="text"
+                  placeholder="Tìm kiếm..."
+                  value={inputValue}
+                  onChange={(e) => setInputValue(e.target.value)}
+                  className={`border border-gray-300 rounded-lg px-4 py-2 text-sm transition-all duration-700 ease-in-out
+                  ${showSearch ? 'w-48 opacity-100 ml-2' : 'w-0 opacity-0 ml-0'}
+                  focus:outline-none focus:ring-2 focus:ring-blue-500 overflow-hidden`}
+                />
+                <button
+                  type='submit'
+                  onClick={() => setShowSearch(prev => !prev)}
+                  aria-label="Toggle or search"
+                  className="flex items-center justify-center w-10 h-10 rounded-full hover:bg-blue-100 transition duration-300"
+                >
+                  <IoSearchOutline size={20} className='hover:scale-105' />
+                </button>
+              </form>
 
               {/* Login / User Icon */}
               <Link
@@ -324,7 +352,8 @@ function HeaderComponent({ isHiddenSearch = false, isHiddenCart = false }) {
                 ref={inputRef}
                 type="text"
                 placeholder="Tìm kiếm..."
-                onChange={onSearch}
+                onClick={onSearch}
+                onChange={(e) => setInputValue(e.target.value)}
                 className="w-full outline-none text-sm"
               />
             </div>
@@ -386,74 +415,7 @@ function HeaderComponent({ isHiddenSearch = false, isHiddenCart = false }) {
           </div>
         </div>
       )}
-      {/* <WrapperHeader gutter={16} style={{ justifyContent: isHiddenSearch && isHiddenCart ? 'space-between' : 'unset' }}>
-        <Col span={5}>
-          <Image
-            onClick={() => navigate('/')}
-            src={imageLogo}
-            preview={false}
-            alt="image-logo"
-            height="55px"
-            width="55px"
-          />
-        </Col>
 
-        {!isMobile && !isHiddenSearch && (
-          <Col span={13}>
-            <ButtonInputSearch
-              size="large"
-              placeholder="Nhập từ khóa tìm kiếm"
-              onChange={onSearch}
-            />
-          </Col>
-        )}
-
-        <Col span={isMobile ? 19 : 6} style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '20px' }}>
-          {isMobile ? (
-            <Popover content={mobileMenuContent} trigger="click" placement="bottomRight">
-              <MenuOutlined style={{ fontSize: 24, cursor: 'pointer' }} />
-            </Popover>
-          ) : (
-            <>
-              <Loading isPending={loading}>
-                <WrapperHeaderAccount>
-                  {userAvatar ? (
-                    <img src={userAvatar} alt='avatar' style={{
-                      height: '40px',
-                      width: '40px',
-                      borderRadius: '50%',
-                      objectFit: 'cover'
-                    }} />
-                  ) : (
-                    <UserOutlined style={{ fontSize: '30px' }} />
-                  )}
-                  {user?.access_token ? (
-                    <Popover content={content} trigger="click">
-                      <div style={{ cursor: 'pointer' }}>{userName?.length ? userName : user?.email}</div>
-                    </Popover>
-                  ) : (
-                    <div onClick={handleNavigateLogin} style={{ cursor: 'pointer' }}>
-                      <WrapperTextHeaderSmall>Tài khoản</WrapperTextHeaderSmall>
-                      <CaretDownOutlined />
-                    </div>
-                  )}
-                </WrapperHeaderAccount>
-              </Loading>
-
-              {!isHiddenCart && (
-                <WrapperHeaderAccount>
-                  <div onClick={() => navigate('/order')} style={{ cursor: 'pointer' }}>
-                    <Badge count={order?.orderItems?.length} size='small'>
-                      <ShoppingCartOutlined style={{ fontSize: '30px', color: 'rgb(130, 134, 158)' }} />
-                    </Badge>
-                    <WrapperTextHeaderSmall>Giỏ hàng</WrapperTextHeaderSmall>
-                  </div>
-                </WrapperHeaderAccount>
-              )}
-            </>
-          )}
-        </Col>
-      </WrapperHeader> */}
     </div>
 
 

@@ -5,6 +5,7 @@ import OrderPage from "../pages/OrderPage/OrderPage";
 import ProductDetailPage from "../pages/ProductDetailPage/ProductDetailPage";
 import ProductsPage from "../pages/ProductsPage/ProductsPage";
 import ProfilePage from "../pages/Profile/ProfilePage";
+import SearchPage from "../pages/SearchPage/SearchPage";
 import SignInPage from "../pages/SignInPage/SignInPage";
 import SignUpPage from "../pages/SignUpPage/SignUpPage";
 import TypeProductPage from "../pages/TypeProductPage/TypeProductPage";
@@ -14,24 +15,36 @@ export const routes = [
     {
         path: '/',
         page: HomePage,
-        isShowHeader: true
+        isShowHeader: true,
+        isShowFooter: true
     },
     {
         path: '/order',
         page: OrderPage,
-        isShowHeader: true
+        isShowHeader: true,
+        isShowFooter: true
 
     },
     {
         path: '/products',
         page: ProductsPage,
-        isShowHeader: true
+        isShowHeader: true,
+        isShowFooter: true
+
+    },
+    {
+        path: '/search',
+        page: SearchPage,
+        isShowHeader: true,
+        isShowFooter: true
 
     },
     {
         path: '/product/:type',
         page: TypeProductPage,
-        isShowHeader: true
+        isShowHeader: true,
+        isShowFooter: true
+
 
     },
     {
@@ -50,7 +63,9 @@ export const routes = [
     {
         path: '/product-details/:id',
         page: ProductDetailPage,
-        isShowHeader: true
+        isShowHeader: true,
+        isShowFooter: true
+
 
     },
     {
