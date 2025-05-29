@@ -10,6 +10,7 @@ import { updateUser } from './redux/slides/userSlide'
 import axios from 'axios'
 import Loading from './components/LoadingComponent/Loading'
 import { isPending } from '@reduxjs/toolkit'
+import FooterComponent from './components/FooterComponent/FooterComponent'
 
 
 
@@ -89,7 +90,7 @@ function App() {
 
     <div className='bg-gray-100'>
       <Router>
-        <Routes>
+        {/* <Routes>
           {routes.map((route) => {
             const Page = route.page
             const ischeckAuth = !route.isPrivate || user.isAdmin
@@ -98,6 +99,22 @@ function App() {
               <Route key={route.path} path={route.path} element={
                 <Layout>
                   <Page />
+                </Layout>
+              } />
+            )
+          })}
+        </Routes> */}
+        <Routes>
+          {routes.map((route) => {
+            const Page = route.page
+            const ischeckAuth = !route.isPrivate || user.isAdmin
+            const Layout = route.isShowHeader && route.isShowFooter ? DefaultComponent : Fragment
+            return (
+              <Route key={route.path} path={route.path} element={
+                <Layout>
+                  <Page />
+                  {/* Footer cho các trang không dùng DefaultComponent */}
+                  {/* {!route.isShowHeader && route.isShowFooter !== false && <FooterComponent />} */}
                 </Layout>
               } />
             )
